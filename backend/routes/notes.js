@@ -83,18 +83,10 @@ router.put("/updatenote/:id", fetchUser, async (req, res) => {
 // for deleting user note
 router.delete("/deletenote/:id", fetchUser, async (req, res) => {
   
+  const {title,description,tag} = req.body;
+  
   try {
-    const newNote = {};
-    if (title) {
-      newNote.title = title;
-    }
-    if (description) {
-      newNote.description = description;
-    }
-    if (tag) {
-      newNote.tag = tag;
-    }
-
+   
     let note = await Note.findById(req.params.id);
     if (!note) {
       return res.status(400).send("Not found");
